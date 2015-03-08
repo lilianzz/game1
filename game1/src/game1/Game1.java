@@ -6,6 +6,8 @@
 
 package game1;
 
+import javalib.worldimages.Posn;
+
 /**
  *
  * @author 栗粒盐
@@ -15,8 +17,20 @@ public class Game1 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+    static final int w = 480;
+    static final int h = 600;
     
+    
+    public static void main(String[] args) {        
+
+    /* Main method */
+        World game = new World(0,
+                new Block(new Posn(((((int) (Math.random()*4))+1)*120-60),25), (Block.blockType((((int) (Math.random()*5))+1)))), 
+                new Play(480,600),
+                0);
+        game.bigBang(w, h, 0.2);
+    
+
+    }
+
 }
