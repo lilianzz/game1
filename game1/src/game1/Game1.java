@@ -29,7 +29,8 @@ public class Game1 {
                 new Play(480,600),
                 0);
         game.bigBang(w, h, 0.2);
-    
+    System.out.println(Test.heightClear());
+    System.out.println(Test.heightMatch());
 
     }
 

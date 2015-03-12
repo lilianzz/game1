@@ -20,35 +20,42 @@ public class Play  {
 
     // implementation of the playing field
     // An ArrayList of Blocks
-    int width;
-    int height;
     ArrayList<Block> landscape;
     
     
     public Play (int w, int h) {
-        this.width = w;
-        this.height = h;
         landscape = new ArrayList<>(w*h);
+    }
+    
+    public boolean print() {        
+        System.out.println(this.landscape.size());
+        for (Block landscape1: this.landscape) {
+            System.out.println(" "+landscape1.type+" "+landscape1.posn.x+" "+landscape1.posn.y+" ");
+        }
+        return(true);
     }
     
     public boolean match(Block b) {
         boolean r = false;
             for (Block landscape1 : this.landscape) {
-                System.out.println(b.posn.y +""+b.posn.x+""+landscape1.posn.y+""+landscape1.posn.x);
                 if (landscape1.equals(b)) {
                     r = true;
-                    System.out.println("bump!!!!!!");
                 }
             }
             return r;
     }
 
     public int height() {
-        return this.height;
+        int min = 600;
+        for (Block landscape1 : this.landscape) {
+            if (landscape1.posn.y < min) {
+                min = landscape1.posn.y;
+            }                       
+        }
+        return ((625-min)/50);
     }
     
     public boolean add(Block b) {
-        System.out.println(b.posn.y);
         this.landscape.add(b);
         return true;
     }
@@ -57,7 +64,6 @@ public class Play  {
         for (Block landscape1 : this.landscape) {
                 if (landscape1.equals(b)) {
                     landscape1.changeColor();
-                    System.out.println("bump!!!!!!");
                 }
             }
         return(true);
@@ -88,17 +94,19 @@ public class Play  {
     }
     
         
-    public boolean checkClear(Block b) {
+    public Block checkClear() {
         int t = 0;
         for (Block landscape1 : this.landscape) {
-            if ((landscape1.posn.y == b.posn.y) && (landscape1.isSameType(b))) {
+            t=0;
+            for (Block landscape2 : this.landscape)
+            if ((landscape1.posn.y == landscape2.posn.y) && (landscape1.isSameType(landscape2))) {
                 t++;
             }
+            if (t==4) {
+            return(landscape1);
+            }
         }
-        if (t==4) {
-            return(true);
-        }else
-            return(false);
+        return(null);
     }
     
     public boolean clear(Block b) {
@@ -112,6 +120,7 @@ public class Play  {
                     this.landscape.set(i, this.landscape.get(i).next());
                 }
         }
+               
         return(true);
     }
     
@@ -130,10 +139,8 @@ public class Play  {
         } else {
             boolean r = false;
             for (Block landscape1 : this.landscape) {
-                System.out.println(b.posn.y +""+b.posn.x+""+landscape1.posn.y+""+landscape1.posn.x);
                 if ((landscape1.posn.x == b.posn.x) && (landscape1.posn.y == b.posn.y)) {
                     r = true;
-                    System.out.println("bump!!!!!!");
                 }
             }
             return r;
