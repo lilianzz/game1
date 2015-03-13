@@ -70,13 +70,17 @@ public class Test {
     
     static public boolean changeColorSame() {
         boolean r=true;
+        Play test;
         for (int i=0;i<200;i++) {
-            Block test = aRandomBlock();
-            Block t1 = new Block(new Posn(50,50),test.type);
-            test.changeColor();
-            if ((t1.isSameType(test) && !(t1.type==Color.black))) {
+            test = new Play(480,600);
+            Block t1 = aRandomBlock();            
+            Block t2 = new Block(t1.next().posn, (Block.blockType((((int) (Math.random()*5))+1))));
+            test.add(new Block(t1.posn,t1.type));
+            test.add(new Block(t2.posn,t2.type));         
+            test.colorMatch();            
+            if (!((test.landscape.size()==1) == ((t1.isSameType(t2)) && !(t1.type == Color.black)))) {
                 r=false;
-                test.print();
+                t1.print();t2.print();test.print();
             }         
         }
         return(r);
@@ -118,7 +122,9 @@ public class Test {
         test.add(createBlock(2,2,Color.lightGray));
         test.add(createBlock(2,3,Color.white));
         test.add(createBlock(2,4,Color.white));
-        while (!test.colorMatch()) {}
+        while (!test.colorMatch()) {}        
+        System.out.println("group of dead blocks is: (Should print size 1 and a black block) ");
+        test.print();
         if (!(test.landscape.size() ==1)) {return(false);} else {return(true);}        
     }
     
@@ -133,7 +139,32 @@ public class Test {
             if ((!t) && (s1 == test.landscape.size())) {r = false; test.print();}
         }
         return r;        
-    }
+    }   
     
+    static public boolean case2() {
+        Play test = new Play(480,600);
+        test.add(createBlock(0,0,Color.darkGray));        
+        test.add(createBlock(1,0,Color.darkGray));
+        test.add(createBlock(2,0,Color.darkGray));
+        test.add(createBlock(3,0,Color.gray));
+        test.add(createBlock(0,1,Color.white));        
+        test.add(createBlock(1,1,Color.white));        
+        test.add(createBlock(3,1,Color.white));   
+        test.add(createBlock(3,2,Color.gray));          
+        Block live = (createBlock(2,1,Color.white));
+        test.add(live);
+        int score = 0;
+        while (!test.colorMatch()) {}
+        while (!(test.checkClear() == (null))) {
+            test.clear(test.checkClear());
+            score = score+5;
+            while (!test.colorMatch()) {}
+        }
+        System.out.println("Score: "+ score+"  (Should be 10)");
+        System.out.println("group of dead blocks is: (Should be empty and "
+                + "only show size is 0) ");
+        test.print();
+        if (score == 10) {return(true);} else {test.print();return(false);}        
+    }
 
 }

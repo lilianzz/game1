@@ -27,7 +27,7 @@ public class Play  {
     }
     
     public boolean print() {        
-        System.out.println(this.landscape.size());
+        System.out.println("Size: "+this.landscape.size());
         for (Block landscape1: this.landscape) {
             landscape1.print();
         }
@@ -124,6 +124,14 @@ public class Play  {
             }
             return r;
         }
+    }
+    
+    public boolean testSolid() {
+        boolean r = true;
+        for (Block landscape1: this.landscape) {
+            if (!this.stop(landscape1.next())) {r=false;}
+        }
+        return(r);
     }
 
 }

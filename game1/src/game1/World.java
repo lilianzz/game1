@@ -79,8 +79,9 @@ public class World extends javalib.funworld.World {
     public World onTick() {
             if (!d.stop(live.next())) {
                 this.live = live.next();         
-                if (!(d.checkClear() == (null))) {System.out.println("ERROR on clear");}   
-                if (!(d.colorMatch())) {System.out.println("ERROR on match");}
+                if (!(d.checkClear() == (null))) {System.out.println("Fail on clear");}   
+                if (!(d.colorMatch())) {System.out.println("Fail on match");}
+                if (!(d.testSolid())) {System.out.println("Fail on solid");}
             } else {         
                 d.add(this.live);          
                 while (!d.colorMatch()) {}

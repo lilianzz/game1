@@ -36,6 +36,7 @@ public class Game1 {
     System.out.println("Whether passed the afterMoveInRange test?:  "+Test.afterMoveInRange());
     System.out.println("Whether passed the stopAdd test?:  "+Test.stopAdd());
     System.out.println("Whether passed the case1 test?:  "+Test.case1());
+    System.out.println("Whether passed the case2 test?:  "+Test.case2());
     }
 
 }
