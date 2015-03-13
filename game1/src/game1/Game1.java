@@ -29,9 +29,13 @@ public class Game1 {
                 new Play(480,600),
                 0);
         game.bigBang(w, h, 0.2);
-    System.out.println(Test.heightClear());
-    System.out.println(Test.heightMatch());
-
+    System.out.println("Whether passed the test for height and clear?:  "+Test.heightClear());
+    System.out.println("Whether passed the test for height and colorMatch?:  "+Test.heightMatch());
+    System.out.println("Whether passed the leftRightEquals test?:  "+Test.leftRightEquals());
+    System.out.println("Whether passed the chageColorSame test?:  "+Test.changeColorSame());
+    System.out.println("Whether passed the afterMoveInRange test?:  "+Test.afterMoveInRange());
+    System.out.println("Whether passed the stopAdd test?:  "+Test.stopAdd());
+    System.out.println("Whether passed the case1 test?:  "+Test.case1());
     }
 
 }

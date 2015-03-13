@@ -16,9 +16,8 @@ import javalib.worldimages.*;
 import javalib.worldimages.WorldImage;
 
 public class Play  {
-    // Rectangular
 
-    // implementation of the playing field
+    // implementation of the dead blocks
     // An ArrayList of Blocks
     ArrayList<Block> landscape;
     
@@ -30,20 +29,10 @@ public class Play  {
     public boolean print() {        
         System.out.println(this.landscape.size());
         for (Block landscape1: this.landscape) {
-            System.out.println(" "+landscape1.type+" "+landscape1.posn.x+" "+landscape1.posn.y+" ");
+            landscape1.print();
         }
         return(true);
-    }
-    
-    public boolean match(Block b) {
-        boolean r = false;
-            for (Block landscape1 : this.landscape) {
-                if (landscape1.equals(b)) {
-                    r = true;
-                }
-            }
-            return r;
-    }
+    }   
 
     public int height() {
         int min = 600;
@@ -58,17 +47,7 @@ public class Play  {
     public boolean add(Block b) {
         this.landscape.add(b);
         return true;
-    }
-    
-    public boolean changeColor(Block b) {
-        for (Block landscape1 : this.landscape) {
-                if (landscape1.equals(b)) {
-                    landscape1.changeColor();
-                }
-            }
-        return(true);
-    }
-    
+    }   
        
     public boolean colorMatch() {
         int t = this.landscape.size();

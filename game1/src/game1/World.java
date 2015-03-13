@@ -25,9 +25,6 @@ public class World extends javalib.funworld.World {
     int height = 0;
     
     
-    //  Holds the state consisting of the playfield and the player piece
-    //  TODO: Should the player piece be inside of the PlayField?
-
     /* Constructor */
     public World(int a, Block b, Play c, int d) {
         this.score = a;
@@ -63,10 +60,10 @@ public class World extends javalib.funworld.World {
                 Color.white
         );
         TextImage s2 = new TextImage(
-                new Posn(200,300),
+                new Posn(240,300),
                 "GAME OVER Score:"+ Integer.toString(this.score),
                 40,
-                Color.white
+                Color.red
         );        
         return(new OverlayImages(new OverlayImages(com,s),s2));
     }
@@ -80,32 +77,18 @@ public class World extends javalib.funworld.World {
     //  Block drops
     //  Check for clear & color blend
     public World onTick() {
-        /*if (d.match(live.next()) && !(live.type.equals(Color.BLACK))) {
-            System.out.println('a');
-            d.changeColor(live.next());
-            while (d.checkClear(live.next())) {            
-                d.clear(live.next());
-                score = score + 5;
-                while (!d.colorMatch()) {}
-            }
-            while (!d.colorMatch()) {}
-            live = new Block((new Posn(((((int) (Math.random()*4))+1)*120-60),25)),(Block.blockType((((int) (Math.random()*5))+1))));                        
-        } else*/
             if (!d.stop(live.next())) {
-                this.live = live.next();
+                this.live = live.next();         
+                if (!(d.checkClear() == (null))) {System.out.println("ERROR on clear");}   
+                if (!(d.colorMatch())) {System.out.println("ERROR on match");}
             } else {         
                 d.add(this.live);          
-                while (!d.colorMatch()) { live = live.next(); System.out.println(live.posn.y);}
+                while (!d.colorMatch()) {}
                 while (!(d.checkClear() == (null))) {
                     d.clear(d.checkClear());
                     score = score+5;
                     while (!d.colorMatch()) {}
                 }
-                /*while (d.checkClear(live)) {
-                    d.clear(live);
-                    score = score + 5;                    
-                    while (!d.colorMatch()) {live = live.next();}
-                }     */           
                 live = new Block((new Posn(((((int) (Math.random()*4))+1)*120-60),25)),(Block.blockType((((int) (Math.random()*5))+1))));
                 height = d.height();
             }      

@@ -18,20 +18,17 @@ public class Block {
 
     // Posn
     Posn posn;
-    protected Color type;
+    Color type;
 
     public Block(Posn p, Color c) {
         posn = p;
         this.type = c;
     }
     
-    
-    /*
-     * Returns a Block of random color on the top of random column
-     */
-    public Block () {        ;
+    public boolean print() {
+        System.out.println(" "+this.type+" "+this.posn.x+" "+this.posn.y+" ");
+        return(true);
     }
-
     
     public Block next() {
         int le = this.posn.y + 50;
@@ -54,20 +51,6 @@ public class Block {
                 (this.posn.y > 0) &&
                 (this.posn.y < 600));
         
-    }
-
-    /*
-    * Returns the type of this block
-    */
-    public Color type() {
-        return this.type;
-    }
-
-    /*
-    * Returns the Posn of this block
-    */
-    public Posn posn() {
-        return this.posn;
     }
     
     /*
@@ -113,7 +96,7 @@ public class Block {
     * Returns if Block b has the same color as this block.
     */
     public boolean isSameType(Block b) {
-        return this.type.equals(b.type());
+        return this.type.equals(b.type);
     }
 
 
@@ -128,7 +111,7 @@ public class Block {
      */
     public boolean equals(Block b) {
         return ((this.posn.x == b.posn.x) && (this.posn.y == b.posn.y) &&
-                (this.type.equals(b.type())));
+                (this.type.equals(b.type)));
     }
 
 }
